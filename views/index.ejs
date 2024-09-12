@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🥂 Cocktail Finder</title>
+  <link rel="stylesheet" href="/style.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+  <!-- <style>
+   
+    body {
+      background-image: url('/images/cocktail-background.jpg');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      background-repeat: no-repeat;
+      height: 100vh;
+      color: white;
+    }
+
+    
+    .nav_img {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 20px;
+      z-index: 1000;
+    }
+
+    .mt-5 {
+      margin-top: 2rem !important;
+    }
+
+    
+    .result-box {
+      background-color: rgba(255, 255, 255, 0.8);
+      padding: 15px;
+      margin: 20px 0;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      color: black;
+      text-align: center;
+      width: 100%;
+      height: 450px; 
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    h2, h3, p {
+      color: black;
+    }
+
+    .result-box img {
+      width: 100%;
+      height: 250px; 
+      object-fit: cover; 
+      border-radius: 5px;
+    }
+
+    
+    .col-md-4 {
+      display: flex;
+      align-items: stretch;
+    }
+    
+    
+    .result-box:hover {
+      transform: scale(1.05);
+      transition: 0.3s ease;
+    }
+    .lead{
+      color: white;
+      font-weight: bold;
+    }
+    .result-box .drink-instructions {
+      overflow-y: auto; 
+      max-height: 150px; 
+      margin-top: 10px;
+      padding-right: 5px;
+    }
+
+  </style> -->
+</head>
+<body>
+
+  <!-- Fixed Navbar -->
+  <div class="container-fluid nav_img">
+    <div class="d-flex flex-wrap align-items-center justify-content-center">
+      <form action="/submit" method="POST" class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
+        <div class="input-group mb-10">
+          <input type="text" name="fName" class="form-control" placeholder="Search a Cocktail" aria-label="Recipient's search" aria-describedby="button-addon2">
+          <button class="btn btn-outline-warning" type="submit" id="button-addon2">Search</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div id="center-hero" class="px-4 py-5 my-5 text-center">
+    <img src="cocktail.svg" alt="">
+  
+  
+    <h1 style="color: white;" class="display-5 fw-bold">Welcome to Cocktail Finder</h1>
+    <div class="col-lg-6 mx-auto">
+      <!-- <p  class="lead mb-4">Discover a world of unique and delicious cocktails with our easy-to-use Cocktail Finder app. Whether you're looking for classic drinks or something new to try, simply search by cocktail name to get instant recipes, instructions, and images. Find your perfect drink and impress your guests at your next gathering!</p>
+       -->
+    </div>
+  </div>
+
+</div>
+<div  id="footer-text" class="container">
+  <footer  class="d-flex flex-wrap justify-content-center align-items-center py-5 mt-5">
+      <div class="col-md-4 d-flex justify-content-center align-items-center">
+          <span style="color: white;" class="mb-3 mb-md-0">© 2024 My Cocktail Finder App , All rights reserved</span>
+      </div>
+  </footer>
+</div>
+
+  <!-- Display Search Results in Div Boxes -->
+  <div class="container mt-5">
+    <% if (locals.data &&locals.data.drinks) { %>
+      <h2></h2>
+      <div class="row">
+        <% data.drinks.forEach(function(drink) { %>
+          <div class="col-md-4">
+            <div class="result-box mt-5">
+              <!-- Image First -->
+              <img src="<%= drink.strDrinkThumb %>" alt="<%= drink.strDrink %>">
+              <!-- Drink Information -->
+              <h3><%= drink.strDrink %></h3>
+              <p><strong>Category:</strong> <%= drink.strCategory %></p>
+              <div class="drink-instructions">
+              <p><strong>Instructions:</strong> <%= drink.strInstructions %></p>
+              </div>
+            </div>
+          </div>
+        <% }); %>
+      </div>
+  </div>
+  <script>
+    document.getElementById('center-hero').style.display = 'none';
+    document.getElementById('footer-text').style.display = 'none';
+  </script>
+  <%- include("partial/footer.ejs") %>
+ <% }%>
+</body>
+</html>
