@@ -3,12 +3,10 @@ import bodyParser from "body-parser";
 import axios from "axios";
 import path from "path";
 import { fileURLToPath } from 'url'; // Import to resolve __dirname
-import env from "dotenv";
 
 const app = express();
 const port = 3000;
-env.config()
-const API_URL = process.env.URL;
+const API_URL = "https://www.thecocktaildb.com/api/json/v1/1/search";
 // Resolve __dirname equivalent in ES module
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
