@@ -8,7 +8,7 @@ import env from "dotenv";
 const app = express();
 const port = 3000;
 env.config()
-const API_URL = process.env.API_URL;
+const API_URL = process.env.URL;
 // Resolve __dirname equivalent in ES module
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
