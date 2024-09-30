@@ -3,10 +3,12 @@ import bodyParser from "body-parser";
 import axios from "axios";
 import path from "path";
 import { fileURLToPath } from 'url'; // Import to resolve __dirname
+import env from "dotenv";
 
 const app = express();
 const port = 3000;
-
+env.config()
+const API_URL = process.env.API_URL;
 // Resolve __dirname equivalent in ES module
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -28,7 +30,7 @@ app.get("/", (req, res) => {
 app.post("/submit", async (req, res) => {
   const drinksName = req.body["fName"]; // Get form input
   try {
-    const response = await axios.get(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${drinksName}`);
+    const response = await axios.get(`${API_URL}.php?s=${drinksName}`);
     const result = response.data; // Axios response data
     // Check if result has drinks
     if (result && result.drinks) {
